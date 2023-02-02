@@ -89,7 +89,7 @@ public class SellerDaoJDBC implements SellerDao {
 			st.setInt(1, id);
 
 			int rows = st.executeUpdate();
-			if (rows == 0) { //exceção para caso delete alguém que não exista
+			if (rows == 0) { //excecao para caso delete alguem que nao exista
 				throw new DbException("Error: no seller deleted.");
 			}
 		} catch (SQLException e) {
@@ -125,8 +125,8 @@ public class SellerDaoJDBC implements SellerDao {
 		}
 	}
 
-	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException { // não trata pois ja trata onde
-																							// é chamada
+	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException { // nao trata pois ja trata onde
+																							// eh chamada
 		Seller obj = new Seller();
 		obj.setId(rs.getInt("Id"));
 		obj.setName(rs.getString("Name"));
@@ -137,8 +137,8 @@ public class SellerDaoJDBC implements SellerDao {
 		return obj;
 	}
 
-	private Department instantiateDepartment(ResultSet rs) throws SQLException { // não trata exceção pois já tratamos
-																					// onde ela é chamada
+	private Department instantiateDepartment(ResultSet rs) throws SQLException { // nao trata excecao pois ja tratamos
+																					// onde ela eh chamada
 		Department dep = new Department();
 		dep.setId(rs.getInt("DepartmentId"));
 		dep.setName(rs.getString("DepName"));
@@ -193,12 +193,12 @@ public class SellerDaoJDBC implements SellerDao {
 
 			List<Seller> list = new ArrayList<>();
 			Map<Integer, Department> map = new HashMap<>();
-			// map feito para evitar criação duplicada de departamentos
+			// map feito para evitar criacao duplicada de departamentos
 
 			while (rs.next()) {
-				Department dep = map.get(rs.getInt("DepartmentId")); // primeiro caça se já existe o departamento
+				Department dep = map.get(rs.getInt("DepartmentId")); // primeiro ver se existe o departamento
 
-				if (dep == null) { // se não existir (verdadeiro), a gente instancia um novo departamento
+				if (dep == null) { // se nao existir (verdadeiro), a gente instancia um novo departamento
 					dep = instantiateDepartment(rs);
 					map.put(rs.getInt("DepartmentId"), dep);
 				}
